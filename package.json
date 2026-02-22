@@ -295,7 +295,7 @@
         "@types/node": "^7.0.43",
         "@types/vscode": "^1.109.0",
         "@vscode/test-electron": "^2.5.2",
-        "typescript": "^2.6.1"
+        "typescript": "^5.9.3"
     },
     "dependencies": {
         "graceful-fs": "^4.1.15",

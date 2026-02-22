@@ -15,7 +15,7 @@ export abstract class AbstractContainerViewProvider extends AbstractContainerSto
         if(criteria) {
             this._previousSearchCriteria = <string>criteria
         }
-        this._onDidChangeTreeData.fire()
+        this._onDidChangeTreeData.fire(undefined)
     }
 
     clearCriteria(): void {

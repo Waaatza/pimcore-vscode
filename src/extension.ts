@@ -2,7 +2,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { ServiceDefintionViewProvider } from './mvc/containerview/ServiceDefintionViewProvider';
+import { ServiceDefinitionViewProvider } from './mvc/containerview/ServiceDefintionViewProvider';
 import { ContainerStore } from './symfony/ContainerStore';
 import { RouteDefinitionViewProvider } from './mvc/containerview/RouteDefinitionViewProvider';
 import { FileWatchController } from './mvc/FileWatchController';
@@ -25,7 +25,7 @@ export function activate(context: vscode.ExtensionContext) {
     let containerCacheManager = new ContainerCacheManager(context.workspaceState)
     let containerStore = new ContainerStore(containerCacheManager)
     let phpClassStore = new PHPClassStore(phpClassCacheManager)
-    const serviceDefinitionViewProvider = new ServiceDefintionViewProvider()
+    const serviceDefinitionViewProvider = new ServiceDefinitionViewProvider();
     const routeDefinitionViewProvider = new RouteDefinitionViewProvider()
     const parameterViewProvider = new ParameterViewProvider()
     containerStore.subscribeListerner(serviceDefinitionViewProvider)

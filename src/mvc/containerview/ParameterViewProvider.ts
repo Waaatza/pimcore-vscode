@@ -12,7 +12,7 @@ export class ParameterViewProvider extends AbstractContainerViewProvider {
 
     onParametersChanges(parameters: Parameter[]) {
         this._parameters = parameters
-        this._onDidChangeTreeData.fire()
+        this._onDidChangeTreeData.fire(undefined)
     }
 
     getTreeItems(): AbstractContainerTreeItem[] {

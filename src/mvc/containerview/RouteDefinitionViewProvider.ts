@@ -14,12 +14,12 @@ export class RouteDefinitionViewProvider extends AbstractContainerViewProvider {
 
     onRoutesChanges(routesDefinitions: RouteDefinition[]) {
         this._routesDefinitions = routesDefinitions
-        this._onDidChangeTreeData.fire()
+        this._onDidChangeTreeData.fire(undefined)
     }
 
     togglePathsDisplay(): void {
         this._displayPaths = !this._displayPaths
-        this._onDidChangeTreeData.fire()
+        this._onDidChangeTreeData.fire(undefined)
     }
 
     getTreeItems(): AbstractContainerTreeItem[] {

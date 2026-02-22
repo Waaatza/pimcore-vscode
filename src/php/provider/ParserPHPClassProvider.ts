@@ -1,7 +1,7 @@
 import * as vscode from "vscode"
 import { PHPClassProviderInterface } from "./PHPClassProviderInterface"
 import { PHPClass } from "../PHPClass"
-import engine from 'php-parser'
+import * as engine from 'php-parser'
 import { readFile } from "graceful-fs";
 import { PromiseUtils } from "../PromiseUtils";
 import { PHPUse } from "../PHPUse";
