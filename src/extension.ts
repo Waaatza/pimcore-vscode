@@ -1,8 +1,5 @@
-'use strict';
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { ServiceDefinitionViewProvider } from './mvc/containerview/ServiceDefintionViewProvider';
+import { ServiceDefinitionViewProvider } from "./mvc/containerview/ServiceDefinitionViewProvider";
 import { ContainerStore } from './symfony/ContainerStore';
 import { RouteDefinitionViewProvider } from './mvc/containerview/RouteDefinitionViewProvider';
 import { FileWatchController } from './mvc/FileWatchController';
@@ -17,53 +14,48 @@ import { PHPClassesController } from './mvc/PHPClassesController';
 import { PHPClassCacheManager } from './php/PHPClassCacheManager';
 import { ContainerCacheManager } from './symfony/ContainerCacheManager';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-    
-    let phpClassCacheManager = new PHPClassCacheManager(context.workspaceState)
-    let containerCacheManager = new ContainerCacheManager(context.workspaceState)
-    let containerStore = new ContainerStore(containerCacheManager)
-    let phpClassStore = new PHPClassStore(phpClassCacheManager)
+    const phpClassCacheManager = new PHPClassCacheManager(context.workspaceState);
+    const containerCacheManager = new ContainerCacheManager(context.workspaceState);
+    const containerStore = new ContainerStore(containerCacheManager);
+    const phpClassStore = new PHPClassStore(phpClassCacheManager);
+
     const serviceDefinitionViewProvider = new ServiceDefinitionViewProvider();
-    const routeDefinitionViewProvider = new RouteDefinitionViewProvider()
-    const parameterViewProvider = new ParameterViewProvider()
-    containerStore.subscribeListerner(serviceDefinitionViewProvider)
-    containerStore.subscribeListerner(routeDefinitionViewProvider)
-    containerStore.subscribeListerner(parameterViewProvider)
+    const routeDefinitionViewProvider = new RouteDefinitionViewProvider();
+    const parameterViewProvider = new ParameterViewProvider();
+
+    containerStore.subscribeListerner(serviceDefinitionViewProvider);
+    containerStore.subscribeListerner(routeDefinitionViewProvider);
+    containerStore.subscribeListerner(parameterViewProvider);
 
     vscode.commands.registerCommand('symfony-vscode.refreshContainer', () => {
-        containerStore.clearCacheAndRefreshAll()
-    })
+        containerStore.clearCacheAndRefreshAll();
+    });
 
-    vscode.window.registerTreeDataProvider("serviceDefinitionsView", serviceDefinitionViewProvider)
-    let servicesCommandController = new ServicesCommandController(containerStore, serviceDefinitionViewProvider)
+    vscode.window.registerTreeDataProvider("serviceDefinitionsView", serviceDefinitionViewProvider);
+    new ServicesCommandController(containerStore, serviceDefinitionViewProvider);
 
-    vscode.window.registerTreeDataProvider("routeDefinitionsView", routeDefinitionViewProvider)
-    let routesCommandController = new RoutesCommandController(containerStore, routeDefinitionViewProvider)
+    vscode.window.registerTreeDataProvider("routeDefinitionsView", routeDefinitionViewProvider);
+    new RoutesCommandController(containerStore, routeDefinitionViewProvider);
 
-    vscode.window.registerTreeDataProvider("parametersView", parameterViewProvider)
-    let parametersCommandController = new ParametersCommandController(containerStore, parameterViewProvider)
+    vscode.window.registerTreeDataProvider("parametersView", parameterViewProvider);
+    new ParametersCommandController(containerStore, parameterViewProvider);
 
-    if(vscode.workspace.getConfiguration("symfony-vscode").get("enableFileWatching")) {
-        let fileWatchController = new FileWatchController(containerStore, phpClassStore)
-        context.subscriptions.push(fileWatchController)
+    if (vscode.workspace.getConfiguration("symfony-vscode").get("enableFileWatching")) {
+        const fileWatchController = new FileWatchController(containerStore, phpClassStore);
+        context.subscriptions.push(fileWatchController);
     }
 
-    let autocompleteController = new AutocompleteController(containerStore, phpClassStore)
-    context.subscriptions.push(autocompleteController)
+    const autocompleteController = new AutocompleteController(containerStore, phpClassStore);
+    context.subscriptions.push(autocompleteController);
 
-    let serviceDocCodeActionProvider = new ServiceDocumentationCodeActionProvider(phpClassStore)
-    containerStore.subscribeListerner(serviceDocCodeActionProvider)
-    vscode.languages.registerCodeActionsProvider({scheme: "file", language: "php"}, serviceDocCodeActionProvider)
+    const serviceDocCodeActionProvider = new ServiceDocumentationCodeActionProvider(phpClassStore);
+    containerStore.subscribeListerner(serviceDocCodeActionProvider);
+    vscode.languages.registerCodeActionsProvider({ scheme: "file", language: "php" }, serviceDocCodeActionProvider);
 
-    let phpClassesController = new PHPClassesController(phpClassStore)
+    const phpClassesController = new PHPClassesController(phpClassStore);
 
-    containerStore.refreshAll().then(() => {
-        phpClassStore.refreshAll()
-    })
+    containerStore.refreshAll().then(() => phpClassStore.refreshAll());
 }
 
-// this method is called when your extension is deactivated
-export function deactivate() {
-}
+export function deactivate() {}
