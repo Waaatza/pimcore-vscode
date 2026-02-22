@@ -1,5 +1,6 @@
 # Pimcore for VSCode
 
+WORK IN PROGRESS
 This extension aims to help developing Pimcore projects, by providing basic autocompletion and visualization of the Symfony container.
 
 ![Autocomplete](media/autocomplete.gif)
@@ -43,3 +44,6 @@ If your Symfony app is not running on a conventional installation (for example, 
 Icons from www.flaticon.com, by :
 * [Chanut](https://www.flaticon.com/authors/chanut)
 * [SimpleIcon](https://www.flaticon.com/authors/simpleicon)
+
+Based on Symfony for VSCode by TheNouillet
+* [Github](https://github.com/TheNouillet/symfony-vscode)
