@@ -1,6 +1,17 @@
 # Pimcore for VSCode
 
-WORK IN PROGRESS
+WORK IN PROGRESS!
+
+---
+
+## Run in Development Mode
+
+1. Open Extension Folder in VSCode
+2. npm install 
+3. npm run compile
+4. Ctrl + Shift + D
+5. Run Extension
+
 This extension aims to help developing Pimcore projects, by providing basic autocompletion and visualization of the Symfony container.
 
 ![Autocomplete](media/autocomplete.gif)
