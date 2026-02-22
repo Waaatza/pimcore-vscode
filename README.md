@@ -1,6 +1,6 @@
-# Symfony for VSCode
+# Pimcore for VSCode
 
-This extension aims to help developing Symfony2+ projects, by providing basic autocompletion and visualization of the Symfony container.
+This extension aims to help developing Pimcore projects, by providing basic autocompletion and visualization of the Symfony container.
 
 ![Autocomplete](media/autocomplete.gif)
 
@@ -16,9 +16,9 @@ This extension provides the following features :
 
 ## How does it works ?
 
-To detect Symfony projects, this extension rely on `composer.json` files with `symfony/symfony` as one of its dependencies.
+To detect Symfony projects, this extension rely on `composer.lock` files with `symfony/symfony` as one of its dependencies.
 
-The `composer.json` file is supposed to be at the root of your Symfony project.
+The `composer.lock` file is supposed to be at the "shadow-root" of your Symfony project.
 
 When the project is detected, it simply uses the `debug:container` and `debug:router` console commands to hydrate the views and autocompletions.
 
@@ -37,14 +37,6 @@ Here are the settings that can be overridden for convenience :
 ## Various environments
 
 If your Symfony app is not running on a conventional installation (for example, you are running a Symfony app on a Docker container), you can find different configuration recipes [here](ENVIRONMENTS.md).
-
-## Contribution
-
-If you want to contribute to this extension, everything you want to know is [here](CONTRIBUTING.md).
-
-## Release Notes
-
-See [the changelog](CHANGELOG.md) for releases notes.
 
 ## Acknowledgments
 
